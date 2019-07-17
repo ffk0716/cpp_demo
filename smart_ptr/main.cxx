@@ -3,19 +3,16 @@
 
 using namespace std;
 
-class A {
-public:
-    virtual ~A()
-    {
-        cout << "is a" << endl;
-    }
+class A
+{
+  public:
+    virtual ~A() { cout << "is a" << endl; }
 };
-class B : public A {
-public:
-    ~B()
-    {
-        cout << "is b" << endl;
-    }
+
+class B : public A
+{
+  public:
+    ~B() { cout << "is b" << endl; }
 };
 
 int main()
