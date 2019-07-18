@@ -2,54 +2,53 @@
 #include <iostream>
 
 // from
-// https://stackoverflow.com/questions/9117603/how-does-this-has-member-class-template-work
+// http://twtedlin31.blogspot.com/2016/03/sfinae.html
 
 template <typename Type> class has_member
 {
-    class yes
-    {
-        char m;
-    };
-    class no
-    {
-        yes m[2];
-    };
-    struct BaseMixin
-    {
-        void operator()() {}
-    };
-    struct Base : public Type, public BaseMixin
-    {
-    };
-    template <typename T> class Helper
-    {
-    };
-    template <typename U, typename T = decltype(&U::operator())>
-    static no deduce(U *);
-    static yes deduce(...);
+    using yes = char[1];
+    using no = char[2];
+    template <typename U> static yes &deduce(decltype(&U::foo));
+    template <typename U> static yes &deduce(decltype(&U::foo2));
+    template <typename U> static no &deduce(...);
 
   public:
-    static const bool result = sizeof(yes) == sizeof(deduce((Base *)(0)));
+    enum
+    {
+        value = sizeof(yes) == sizeof(deduce<Type>(0))
+    };
 };
 
 struct A
 {
-}; // SFINAE is triggered for A
+};
 struct B
 {
-    void operator()() {}
-}; // SFINAE is not triggered for B
+    void foo() {}
+};
 struct C
 {
-    void operator()(int, int) {}
-}; // SFINAE is not triggered for C
+    void foo(int) {}
+};
+struct D
+{
+    int foo;
+};
+struct E
+{
+    int foo2;
+};
+struct F
+{
+    int foo3;
+};
 
 TEST(a, b)
 {
-    auto a = has_member<A>::result;
-    EXPECT_FALSE(a);
-    auto b = has_member<B>::result;
-    EXPECT_TRUE(b);
-    auto c = has_member<C>::result;
-    EXPECT_TRUE(c);
+    EXPECT_FALSE(has_member<A>::value);
+    EXPECT_TRUE(has_member<B>::value);
+    EXPECT_TRUE(has_member<C>::value);
+    EXPECT_TRUE(has_member<D>::value);
+    EXPECT_TRUE(has_member<E>::value);
+    EXPECT_FALSE(has_member<F>::value);
 }
