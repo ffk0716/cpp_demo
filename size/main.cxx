@@ -2,36 +2,39 @@
 #include <iostream>
 
 using namespace std;
-class X
+class empty_class
 {
   public:
 };
 
-class A
+class base
 {
   public:
     virtual uint32_t check() { return sizeof(*this); }
 };
 
-class B : public A
+class derv1 : public base
 {
   public:
     uint32_t check() { return sizeof(*this); }
     int b;
 };
-class C : public B
+
+class derv2 : public derv1
 {
-    int c[10];
+    int c;
+    int d;
 };
+
 int main()
 {
-    C *c = new C();
-    TEST_VALUE(sizeof(X));
+    derv1 *c = new derv2();
+    TEST_VALUE(sizeof(empty_class));
     TEST_VALUE(sizeof(void *));
-    cout << sizeof(A) << endl;
-    cout << sizeof(B) << endl;
-    cout << sizeof(C) << endl;
-    cout << sizeof(*c) << endl;
-    cout << c->check() << endl;
+    TEST_VALUE(sizeof(base));
+    TEST_VALUE(sizeof(derv1));
+    TEST_VALUE(sizeof(derv2));
+    TEST_VALUE(sizeof(*c));
+    TEST_VALUE(c->check());
     return 0;
 }
