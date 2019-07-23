@@ -11,6 +11,7 @@ class base
 {
   public:
     virtual uint32_t foo() { return 1; }
+    virtual ~base() = default;
 };
 
 class derv1 : public base
@@ -22,6 +23,7 @@ class derv1 : public base
 
 class derv2 : public derv1
 {
+  public:
     int c;
     int d;
 };
