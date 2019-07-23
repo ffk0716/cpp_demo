@@ -10,13 +10,13 @@ class empty_class
 class base
 {
   public:
-    virtual uint32_t check() { return sizeof(*this); }
+    virtual uint32_t foo() { return 1; }
 };
 
 class derv1 : public base
 {
   public:
-    uint32_t check() override { return sizeof(*this); }
+    uint32_t foo() override { return 2; }
     int b;
 };
 
@@ -35,7 +35,7 @@ int main()
     TEST_VALUE(sizeof(derv1));
     TEST_VALUE(sizeof(derv2));
     TEST_VALUE(sizeof(*c));
-    TEST_VALUE(c->check());
+    TEST_VALUE(c->foo());
     delete c;
     return 0;
 }
