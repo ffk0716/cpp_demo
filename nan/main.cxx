@@ -1,9 +1,9 @@
 #include <cmath>
 #include <iostream>
 #include <limits>
+#include "common.h"
 
 
-#define TEST_VALUE(exp) std::cout << "(" #exp  ") == " << (exp) << std::endl;
 int main()
 {
     float inf = std::numeric_limits<float>::infinity();
