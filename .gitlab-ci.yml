@@ -1,12 +1,28 @@
-image: rikorose/gcc-cmake
+image: $CI_REGISTRY_IMAGE:1.0
+
+stages:
+    - format
+    - build
+
+format:
+  stage: format
+  script:
+    - mkdir -p build
+    - pushd build
+    - cmake ..
+    - popd
+    - run-clang-tidy -p ./build -fix -format
+    - find . -regex '.*\.\(cpp\|hpp\|cxx\)' -exec clang-format -i {} \;
+    - git diff --exit-code
 
 build:
   stage: build
   script:
     - git clean -ffdx
-    - mkdir -p b
-    - cd b
+    - mkdir -p build
+    - pushd build
     - cmake ..
     - make -j$(nproc)
     - ctest -j$(nproc)
+    - popd
 

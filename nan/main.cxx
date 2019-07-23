@@ -1,8 +1,7 @@
+#include "common.h"
 #include <cmath>
 #include <iostream>
 #include <limits>
-#include "common.h"
-
 
 int main()
 {

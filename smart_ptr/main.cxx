@@ -12,7 +12,7 @@ class A
 class B : public A
 {
   public:
-    ~B() { cout << "is b" << endl; }
+    ~B() override { cout << "is b" << endl; }
 };
 
 int main()

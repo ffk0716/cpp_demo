@@ -2,13 +2,14 @@ cmake_minimum_required(VERSION 3.11)
 
 project(demo)
 enable_testing()
-set (CMAKE_CXX_STANDARD 11)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD 11)
 
 add_subdirectory(third_party)
 
 # gtest
 ExternalProject_Get_Property(google_test INSTALL_DIR)
-include_directories(${INSTALL_DIR}/include)
+include_directories(SYSTEM ${INSTALL_DIR}/include)
 link_directories(${INSTALL_DIR}/lib)
 function(add_gtest name)
     add_dependencies(${name} third_party)

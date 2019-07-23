@@ -16,7 +16,7 @@ class base
 class derv1 : public base
 {
   public:
-    uint32_t check() { return sizeof(*this); }
+    uint32_t check() override { return sizeof(*this); }
     int b;
 };
 
@@ -36,5 +36,6 @@ int main()
     TEST_VALUE(sizeof(derv2));
     TEST_VALUE(sizeof(*c));
     TEST_VALUE(c->check());
+    delete c;
     return 0;
 }
