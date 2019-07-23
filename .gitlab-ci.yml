@@ -1,0 +1,12 @@
+image: rikorose/gcc-cmake
+
+build:
+  stage: build
+  script:
+    - git clean -ffdx
+    - mkdir -p b
+    - cd b
+    - cmake ..
+    - make -j$(nproc)
+    - ctest -j$(nproc)
+
