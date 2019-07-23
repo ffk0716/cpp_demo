@@ -17,7 +17,11 @@ function(add_gtest name)
 endfunction()
 
 
-add_subdirectory(gtest)
-add_subdirectory(nan)
-add_subdirectory(smart_ptr)
+include_directories(common)
+
+add_subdirectory(gtest_demo)
 add_subdirectory(has_member)
+add_subdirectory(hello)
+add_subdirectory(nan)
+add_subdirectory(size)
+add_subdirectory(smart_ptr)
