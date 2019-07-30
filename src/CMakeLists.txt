@@ -12,9 +12,6 @@ endfunction()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror -Wextra")
 
-include_directories(common)
-
-
 add_subdirectory(gtest_demo)
 add_subdirectory(has_member)
 add_subdirectory(hello)
