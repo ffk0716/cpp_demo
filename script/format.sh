@@ -14,5 +14,5 @@ if [ ! -d build ]; then
     popd
 fi
 run-clang-tidy -p ./build -fix -format
-find . -regex '.*\.\(cpp\|hpp\|cxx\)' -exec clang-format -i {} \;
+find . -regex '.*\.\(cpp\|h\|cxx\)' -exec clang-format -i {} \;
 git diff --exit-code

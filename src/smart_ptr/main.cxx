@@ -6,13 +6,19 @@ using namespace std;
 class A
 {
   public:
-    virtual ~A() { cout << "is a" << endl; }
+    virtual ~A()
+    {
+        cout << "is a" << endl;
+    }
 };
 
 class B : public A
 {
   public:
-    ~B() override { cout << "is b" << endl; }
+    ~B() override
+    {
+        cout << "is b" << endl;
+    }
 };
 
 int main()

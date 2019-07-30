@@ -10,14 +10,20 @@ class empty_class
 class base
 {
   public:
-    virtual uint32_t foo() { return 1; }
+    virtual uint32_t foo()
+    {
+        return 1;
+    }
     virtual ~base() = default;
 };
 
 class derv1 : public base
 {
   public:
-    uint32_t foo() override { return 2; }
+    uint32_t foo() override
+    {
+        return 2;
+    }
     int b;
 };
 
