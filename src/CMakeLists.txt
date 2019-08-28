@@ -1,11 +1,13 @@
 
 set(CMAKE_CXX_STANDARD 11)
 # gtest
-ExternalProject_Get_Property(google_test INSTALL_DIR)
-include_directories(SYSTEM ${INSTALL_DIR}/include)
-link_directories(${INSTALL_DIR}/lib)
-function(add_gtest name)
-    add_dependencies(${name} third_party)
+
+function(add_gtest_executable name)
+    ExternalProject_Get_Property(google_test INSTALL_DIR)
+    include_directories(SYSTEM ${INSTALL_DIR}/include)
+    link_directories(${INSTALL_DIR}/lib)
+    add_executable(${name} ${ARGN})
+    add_dependencies(${name} google_test)
     target_link_libraries(${name} gtest_main gtest pthread)
     add_test(test_${name} ${name})
 endfunction()
